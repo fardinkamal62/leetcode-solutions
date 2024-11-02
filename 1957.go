@@ -11,22 +11,24 @@ func main() {
 }
 
 func makeFancyString(s string) string {
-	runeSample := []rune(s)
 	var result strings.Builder
+	result.Grow(len(s))
 
-	var lastRune rune
+	var lastByte byte
 	count := 0
 
-	for _, letter := range runeSample {
-		if letter == lastRune {
+	for i := 0; i < len(s); i++ {
+		letter := s[i]
+
+		if letter == lastByte {
 			count++
 		} else {
 			count = 1
-			lastRune = letter
+			lastByte = letter
 		}
 
 		if count <= 2 {
-			result.WriteRune(letter)
+			result.WriteByte(letter)
 		}
 	}
 
